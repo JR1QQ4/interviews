@@ -68,6 +68,7 @@ application/x-www-form-urlencoded
 multipart/form-data
 application/json
 text/xml
+Content-Type:  octets/stream
 
 什么是 DNS？
 域名解析服务。将主机名转换为 IP 地址。如将 http://www.cnblogs.com/主机名转换为 IP 地址： 211.137.51.78
@@ -128,6 +129,10 @@ text/xml
 10.python 如何连接数据库操作？
 11.其它的就是运行出报告、代码管理（git）、运行策略和持续集成 jenkins 相关了
 
+python2.X 有这些库名可用: urllib, urllib2, urllib3, httplib, httplib2, requests
+python3.X 有这些库名可用: urllib, urllib3, httplib2, requests
+两者都有的urllib3和requests, 它们不是标准库，urllib3 提供线程安全连接池和文件post支持,与urllib及urllib2的关系不大.
+requests 自称HTTP for Humans, 使用更简洁方便
 
 
 

@@ -1,0 +1,14 @@
+user1: admin1
+pwd1: 123456
+
+nb1:
+  user2: admin2
+  pwd2: 123456
+
+nb2:
+  - a1: 1111
+    a2: 2222
+    a3: !!str 3333
+  - n1: !!str true
+    n2: 12.30
+    n3: ~

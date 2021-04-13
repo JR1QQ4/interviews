@@ -23,6 +23,12 @@
 # a = 1
 # print("%04d" % a)
 
+# 打印99乘法表
+# for i in range(1, 10):
+#     for j in range(1, i + 1):
+#         print(f"{i} * {j} = %-2s" % (i * j), end=" ")  # 右-表示左对齐；+表示在转换值之前要加上正负号
+#     print()
+
 # 已知一个队列,如： [1, 3, 5, 7], 如何把第一个数字，放到第三个位置，得到：[3, 5, 1, 7]
 # a = [1, 3, 5, 7]
 # a.insert(3, a[0])
@@ -41,6 +47,11 @@
 # a = 153
 # print(list(str(a)))
 
+# for i in range(100, 1000):
+#     s = sum([int(j)**3 for j in str(i)])
+#     if i == s:
+#         print(i)
+
 # 如果一个数恰好等于它的因子之和，则称该数为“完全数” ，又称完美数或完备数。
 # 例如：第一个完全数是 6，它有约数 1、 2、 3、 6，除去它本身 6 外，其余 3 个数相加，
 # 1+2+3=6。第二个完全数是 28，它有约数 1、 2、 4、 7、 14、 28，除去它本身 28
@@ -49,7 +60,7 @@
 # for i in range(1, 1000):
 #     s = 0
 #     for j in range(1, i):
-#         if i % j == 0 and j < i:
+#         if i % j == 0:
 #             s += j
 #     if s == i:
 #         wqs.append(i)
@@ -92,6 +103,24 @@
 # b = list(set(a))
 # print(b)
 # print(a)
+
+# a = [1, 6, 8, 11, 9, 1, 8, 6, 8, 7, 8]
+# b = sorted(a)  # 不改变a的序列
+# print(b)
+# print(a)
+
+# 对称数组
+# x = [1, "a",  0, "2", 0, "a", 1]
+# print(x == x[::-1])
+
+# 将数据写成csv文件
+# a = [{"yoyo1": "123456"}, {"yoyo2": "123456"}, {"yoyo3": "123456"}]
+# for i in a:
+#     print(i.keys())
+#     for j in i.keys():
+#         v = i[j]
+#         with open('csv_test.txt', 'a') as f:
+#             f.write(f"{j},{v}\n")
 
 # 计算 n!,例如 n=3(计算 321=6)， 求 10!
 # from functools import reduce
@@ -186,3 +215,77 @@
 #                 all.append(filename)
 #     return all
 # print(get_files(path="C:\\ZZZZZZ\\all_test\\app_test"))
+
+# 连接mysql数据库
+# import pymysql
+# db = pymysql.connect(host="localhost",
+#                      port=3306,
+#                      user='chen',
+#                      passwd='chen',
+#                      db='school'
+#                      )
+# cur = db.cursor()
+# cur.execute("select * from student")
+# data = cur.fetchall()
+# print(data)
+# sql_update = 'delete from student where sno=5'
+# cur.execute(sql_update)
+# db.commit()
+# db.close()
+
+# def insert_db(sql_insert):
+#     import pymysql
+#     db = pymysql.connect(host='localhost',
+#                          port=3306,
+#                          user='root',
+#                          passwd='root',
+#                          db='school')
+#     cur = db.cursor()  # 使用cursor()方法获取操作游标
+#     try:
+#         cur.execute(sql_insert)
+#         db.commit()
+#     except Exception as e:
+#         print("错误信息：%s" % str(e))
+#         db.rollback()  # 错误回滚
+#     finally:
+#         db.close()
+
+# 读取 yaml 文件
+# def yaml_data(path):
+#     import yaml
+#     with open(path, 'r', encoding='utf-8') as f:
+#         d = yaml.safe_load(f)
+#     return d
+# import os
+# yaml_path = os.path.join(os.path.dirname(os.path.relpath(__file__)), 'yaml_test.yaml')
+# d = yaml_data(yaml_path)
+# print(d)
+
+# a = '{"hello": "world"}'
+# print(eval(a))  # 为什么a能转字典
+# b = "hello world"
+# print(eval(b)) # b为什么用eval函数会报错
+
+# pip导出项目依赖包
+# $ pip freeze > requirements.txt
+# $ pip install -r requirements.txt
+
+# import os
+# print(os.environ)
+# print(os.environ.get('JAVA_HOME'))
+# print(os.environ.get('host'))
+# os.environ.setdefault('host', 'http://127.0.0.1:80')
+# print(os.environ.get('host'))
+
+# 迭代器和生成器
+# 菜鸟教程 https://www.runoob.com/python3/python3-iterator-generator.html
+# https://blog.csdn.net/mieleizhi0522/article/details/82142856
+
+# zip
+a = [1, 2, 3, 4, 5]
+b = ["a", "b", "c", "d", "e"]
+print(type(zip(a, b)))
+for i, j in zip(a, b):
+    print(i, j)
+c = [str(i) + str(j) for i, j in zip(a, b)]
+print(c)

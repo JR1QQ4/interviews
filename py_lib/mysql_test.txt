@@ -1,0 +1,85 @@
+Windows 安装： https://www.cnblogs.com/lmh2072005/p/5656392.html
+Linux 安装： https://www.cnblogs.com/yoyoketang/p/10268896.html
+Navicat 注册码： 注册码  NAVN-U6QE-6PX7-44K5
+
+Windows 下忘记密码：
+1.以系统管理员身份运行cmd
+2.查看mysql服务是否已经启动，如果已经启动，就停止：net stop mysql
+    - 查看是否安装mysql服务： sc query mysql
+    - 安装多个mysql服务可能冲突，从注册表中删除mysql服务：sc delete mysql
+    - 创建服务（并将其添加到注册表中）：sc create mysql
+3.切换到MySQL安装路径下：C:\ZZZZZZ\mysql-5.7.29-winx64；如果已经配了环境变量，可以不用切换了
+4.在命令行输入：mysqld -nt --skip-grant-tables
+或使用: mysqld-safe --skip-grant-tables --skip-networking&
+或使用: service mysqld start --skip-grant-tables --skip-networking
+5.以管理员身份重新启动一个cmd命令窗口，输入：mysql -uroot -p，Enter进入数据库
+6.如果不想改密码，只是想看原来的密码的话，可以在命令行执行这个语句：select host,user,password from mysql.user;
+7.如果要修改密码的话，在命令行下依次执行下面的语句：
+use mysql;
+update user set password=password("new_pass") where user="root";  // new_pass 就是想要设置的淼淼
+或者 alter user root@'localhost' identified by 'new_pass';
+flush privileges;
+
+Linux 下忘记密码：
+要是上述步骤找不到临时密码，就使用此方法，先停掉mysql，以安全方式启动: systemctl stop mysql.service
+以安全方式启动mysql: /usr/bin/mysql_safe --skip-grant-tables > /dev/null 2>&1 &
+然后执行: /usr/bin/mysql -u root mysql
+出现"mysql>"提示符后输入:
+mysql>update user set password=Password('root') where User='root';
+mysql>flush privileges;
+退出后，使用以下命令登陆mysql，试试是否成功: mysql -u root -p
+按提示输入密码: root
+出现Welcome to the MySQL那就是登录成功了
+
+python连接mysql:
+import pymysql
+db = pymysql.connect(host="localhost",
+                     port=3306,
+                     user='chen',
+                     passwd='chen',
+                     db='school'
+                     )
+cur = db.cursor()  # 使用 cursor() 方法创建一个游标对象 cur
+cur.execute("select * from student")
+data = cur.fetchall()
+print(data)
+sql_update = 'delete from student where sno=5'
+cur.execute(sql_update)  # 使用 execute() 方法执行 SQL 语句
+db.commit()  # 一定要提交才能生效
+db.close()
+
+def insert_db(sql_insert):
+    db = pymysql.connect(host='localhost',
+                         port=3306,
+                         user='root',
+                         passwd='root',
+                         db='school')
+    cur = db.cursor()  # 使用cursor()方法获取操作游标
+    try:
+        cur.execute(sql_insert)
+        db.commit()
+    except Exception as e:
+        print("错误信息：%s" % str(e))
+        db.rollback()  # 错误回滚
+    finally:
+        db.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
