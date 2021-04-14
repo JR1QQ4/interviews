@@ -282,10 +282,11 @@
 # https://blog.csdn.net/mieleizhi0522/article/details/82142856
 
 # zip
-a = [1, 2, 3, 4, 5]
-b = ["a", "b", "c", "d", "e"]
-print(type(zip(a, b)))
-for i, j in zip(a, b):
-    print(i, j)
-c = [str(i) + str(j) for i, j in zip(a, b)]
-print(c)
+# a = [1, 2, 3, 4, 5]
+# b = ["a", "b", "c", "d", "e"]
+# print(type(zip(a, b)))
+# for i, j in zip(a, b):
+#     print(i, j)
+# c = [str(i) + str(j) for i, j in zip(a, b)]
+# print(c)
+

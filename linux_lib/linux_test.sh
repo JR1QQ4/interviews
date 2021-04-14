@@ -62,12 +62,46 @@ jar -xvf jenkins.war  # 解压 war 包
 # 换成： http://mirror.esuni.jp/jenkins/updates/update-center.json
 # 或者 https 换成 http: http://updates.jenkins.io/update-center.json
 
+# 文件上传与下载（rz，sz）
+yum -y install lrzsz
+mkdir /root/testfile
+cd /root/testfile
+# 上传文件
+rz
+# 下载文件
+sz filename
 
+# python环境搭建
+mkdir /root/python36
+cd /root/python36
+wget https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz
+tar -xvf Python-3.6.8.tgz
+cd Python-3.6.8
+./configure --prefix=/root/python36
+make
+make install
+ln -s /root/python36/bin/python3.6 /usr/bin/python3
+python3 -V
+ln -s /root/python36/bin/pip3 /usr/bin/pip3
+pip3 -V
 
-
-
-
-
+# java环境搭建
+rpm -qa | grep yum
+rpm -qa | grep java
+# 如果没有 java 环境，接着就去查找java-1.8.0的可以使用的安装包
+yum list | grep java-1.8.0-openjdk
+yum -y install java-1.8.0-openjdk*
+java -version
+javac
+# 或者使用解压的方式
+tar -xvf jdk-8u65-linux-x64.tar.gz
+vim /etc/profile
+export JAVA_HOME=/home/software/jdk1.8.0_65
+export JRE_HOME=/home/software/jdk1.8.0_65/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
+source /etc/profile
+java -version
 
 
 

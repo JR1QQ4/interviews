@@ -45,44 +45,45 @@ import pytest
 #     print("test_send_webservice")
 
 # @pytest.fixture(scope="function")
-# def demo_fix():
-#     print("\n测试用例的前置准备操作")
-#     yield
-#     print("测试用例的后置操作")
-# def test_1(demo_fix):
-#     print("\n开始执行测试用例11111")
-# def test_2():
-#     print("\n开始执行测试用例22222")
-# def test_3(demo_fix):
-#     print("\n开始执行测试用例33333")
+@pytest.fixture(scope="module")
+def demo_fix():
+    print("\n测试用例的前置准备操作")
+    yield
+    print("测试用例的后置操作")
+def test_1(demo_fix):
+    print("\n开始执行测试用例11111")
+def test_2():
+    print("\n开始执行测试用例22222")
+def test_3(demo_fix):
+    print("\n开始执行测试用例33333")
 
 # allure
 # pip install pytest==4.5.0 --index-url  https://pypi.douban.com/simple
 # pip install allure-pytest==2.8.6 --index-url  https://pypi.douban.com/simple
 # allure是一个命令行工具，需要去github上下载最新版 https://github.com/allure-framework/allure2/releases
-import allure
-@pytest.fixture(scope="session")
-def login():
-    print("用例先登录")
-@allure.step("步骤1：点xxx")
-def step_1():
-    print("step 111")
-@allure.step("步骤2：点yyy")
-def step_2():
-    print("step 222")
-@allure.feature("编辑页面")
-class TestEditPage:
-    """编辑页面 Edit"""
-    @allure.story("这是第一xxx的用例")
-    def test_1(self, login):
-        """用例描述：先登录，再去执行xxx"""
-        step_1()
-        step_2()
-        print("xxx")
-    @allure.story("打开a页面")
-    def test_2(self, login):
-        """用例描述：先登录，再去执行yyy"""
-        print("yyy")
+# import allure
+# @pytest.fixture(scope="session")
+# def login():
+#     print("用例先登录")
+# @allure.step("步骤1：点xxx")
+# def step_1():
+#     print("step 111")
+# @allure.step("步骤2：点yyy")
+# def step_2():
+#     print("step 222")
+# @allure.feature("编辑页面")
+# class TestEditPage:
+#     """编辑页面 Edit"""
+#     @allure.story("这是第一xxx的用例")
+#     def test_1(self, login):
+#         """用例描述：先登录，再去执行xxx"""
+#         step_1()
+#         step_2()
+#         print("xxx")
+#     @allure.story("打开a页面")
+#     def test_2(self, login):
+#         """用例描述：先登录，再去执行yyy"""
+#         print("yyy")
 # >pytest --alluredir=./report/allure_raw
 # >allure serve report/allure_raw
 # >allure generate directory-with-results/ -o directory-with-report
