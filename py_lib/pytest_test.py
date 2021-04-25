@@ -45,17 +45,17 @@ import pytest
 #     print("test_send_webservice")
 
 # @pytest.fixture(scope="function")
-@pytest.fixture(scope="module")
-def demo_fix():
-    print("\n测试用例的前置准备操作")
-    yield
-    print("测试用例的后置操作")
-def test_1(demo_fix):
-    print("\n开始执行测试用例11111")
-def test_2():
-    print("\n开始执行测试用例22222")
-def test_3(demo_fix):
-    print("\n开始执行测试用例33333")
+# @pytest.fixture(scope="module")
+# def demo_fix():
+#     print("\n测试用例的前置准备操作")
+#     yield
+#     print("测试用例的后置操作")
+# def test_1(demo_fix):
+#     print("\n开始执行测试用例11111")
+# def test_2():
+#     print("\n开始执行测试用例22222")
+# def test_3(demo_fix):
+#     print("\n开始执行测试用例33333")
 
 # allure
 # pip install pytest==4.5.0 --index-url  https://pypi.douban.com/simple
@@ -87,6 +87,37 @@ def test_3(demo_fix):
 # >pytest --alluredir=./report/allure_raw
 # >allure serve report/allure_raw
 # >allure generate directory-with-results/ -o directory-with-report
+
+# @pytest.fixture
+# def init():
+#     print("---------init start------------")
+#     yield True, 100
+#     print("---------init end------------")
+# @pytest.fixture
+# def init2():
+#     print("---------init2 start------------")
+#     yield "{'a': '123', 'b': '234'}"
+#     print("---------init2 end------------")
+# @pytest.fixture(scope="class")
+# def init_cls():
+#     print("---------class start------------")
+#     yield ['q', 123]
+#     print("---------class end------------")
+# @pytest.mark.usefixtures("init_cls")
+# class TestFixture:
+#     @pytest.mark.usefixtures("init")
+#     def test_one(self, init):
+#         print("test one")
+#         print(init)
+#     @pytest.mark.usefixtures("init2")
+#     def test_two(self, init_cls):
+#         print("test two")
+#         print(init_cls)
+#     @pytest.mark.usefixtures("init")
+#     @pytest.mark.usefixtures("init2")
+#     def test_three(self):
+#         print("test three")
+#         print(init2)
 
 if __name__ == '__main__':
     pytest.main(["-s", "pytest_test.py"])
