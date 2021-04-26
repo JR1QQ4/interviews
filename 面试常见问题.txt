@@ -65,7 +65,7 @@
 
 6.TCP/IP
 - 四层模型：
-    - 应用层：HTTP(80/8080/3128/8081/9098)、SMTP、FTP(21)、Telent(23)、DNS
+    - 应用层：HTTP(80)、SMTP(25)、FTP(21)、Telent(23)、DNS
     - 运输层：TCP、UDP
     - 网络层：IP、ARP
     - 网络接口层
