@@ -69,6 +69,8 @@ def sort():
                 print(res[i + n])
         except:
             break
+
+
 def sort2(n):
     boys = []
     girls = []
@@ -82,6 +84,16 @@ def sort2(n):
     return result
 
 
+class SingleInstance:
+    __instance = None
+    
+    @classmethod
+    def get_instance(cls):
+        if cls.__instance is None:
+            cls.__instance = SingleInstance()
+        return cls.__instance
+
+
 if __name__ == '__main__':
     print(del_str("babababa"))
     print(del_str("aaaab"))
@@ -91,3 +103,9 @@ if __name__ == '__main__':
     print(Solution.getMinString("abbcd", "bbc"))
     # sort()
     print(sort2(6))
+
+    s1 = SingleInstance.get_instance()
+    s2 = SingleInstance.get_instance()
+    print(s1 == s2)
+    print(id(s1))
+    print(id(s2))

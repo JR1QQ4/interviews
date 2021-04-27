@@ -1,0 +1,28 @@
+1.Linux中想要杀掉ID为123456的进程？
+- 在Linux中可以使用 top 和 ps 定位进程
+    - ps -aux | grep chrome，a显示终端上所有进程(包括其他用户的进程)，u显示进程的用户/所有者，x显示未附加到终端的进程
+    - ps -ef | grep firefox，e显示所有进程(等价于-A)，f全格式，h不显示标题，l长格式，w宽输出
+        - 进程状态：R 运行、S 中断、D 不可中断、Z 僵死、T 停止
+    - pstree [-p] <pid>，以树状图显示进程PID为<pid>的进程以及子孙进程，如果有-p参数则同时显示每个进程的PID
+- 有两个命令可以杀死进程
+    - 杀死一个进程：kill -l，l查看杀死进程的方式
+        - kill [SIGHUP | SIGINT | SIGKILL | SIGTERM | SIGSTOP] PID
+            - SIGHUP，可以使用数字 1 表示，表示挂断、终端断线
+            - SIGINT 2，表示从键盘中断（同 Ctrl + C）
+            - SIGKILL 9，杀死信号、强制终止
+            - SIGTERM 15，终止信号、终止（默认）
+            - SIGSTOP 17，19，23 停止进程、暂停（同 Ctrl + Z）
+            - CONT 18 继续（与STOP相反， fg/bg命令）
+    - killall [I | l] 进程名称，不需要使用ps查看PID，I忽略大小写，l列出所有支持的信号，killall httpd
+
+2.Linux查找当前目录下大于10K的文件？
+- find [PATH] [option] [action]：
+    - 与时间相关选项：-mtime +n|-n|n、 -newer file
+        - 修改时间（-mtime/天，-mmin/分钟）：文件最后一次修改时间
+        - 访问时间（-atime/天，-amin/分钟）：用户最近一次访问时间
+        - 变化时间（-ctime/天，-cmin/分钟）：文件数据元（例如权限等）最后一次修改时间
+    - 与使用者或群组名称有关：-uid n、-gid n、-user name拥有者、-group name、-nouser、-nogroup
+    - 与文件权限及名称有关：-name filename、-size [+-]SIZE、-type TYPE(fldcbsp)、-perm [-|/|空]mode，mode权限755
+    - 找到文件后执行命令：-exec command、-print
+- find . -type f -size +10k
+- 找出当前目录下，路径中包含wysiwyg的文件/路径: find . -path "*wysiwyg*"
